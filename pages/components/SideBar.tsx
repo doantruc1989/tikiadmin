@@ -1,20 +1,23 @@
 import { forwardRef } from "react";
 import Link from "next/link";
-import { HomeIcon, CreditCardIcon, UserIcon } from "@heroicons/react/24/solid";
+import {
+  FaHome,
+  FaBorderAll,
+  FaUser,
+  FaRegFolderOpen,
+  FaWallet,
+  FaChartBar,
+} from "react-icons/fa";
 import { useRouter } from "next/router";
 
 const SideBar = forwardRef(({ showNav }: any, ref: any) => {
   const router = useRouter();
 
   return (
-    <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm">
+    <div ref={ref} className="fixed z-20 w-56 h-full bg-white shadow-sm">
       <div className="flex justify-center mt-6 mb-14">
         <picture>
-          <img
-            className="w-32 h-auto"
-            src="/logotiki.png"
-            alt="company logo"
-          />
+          <img className="w-32 h-auto" src="/logotiki.png" alt="company logo" />
         </picture>
       </div>
 
@@ -28,14 +31,15 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
             }`}
           >
             <div className="mr-2">
-              <HomeIcon className="h-5 w-5" />
+              <FaHome className="h-5 w-5" />
             </div>
             <div>
               <p>Dash Board</p>
             </div>
           </div>
         </Link>
-        <Link href="/quanlyhome">
+
+        <Link href="/homemanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/account"
@@ -44,14 +48,15 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
             }`}
           >
             <div className="mr-2">
-              <UserIcon className="h-5 w-5" />
+              <FaBorderAll className="h-5 w-5" />
             </div>
             <div>
-              <p>Home page</p>
+              <p>Home Page</p>
             </div>
           </div>
         </Link>
-        <Link href="/quanlyuser">
+
+        <Link href="/usermanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/account"
@@ -60,14 +65,14 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
             }`}
           >
             <div className="mr-2">
-              <UserIcon className="h-5 w-5" />
+              <FaUser className="h-5 w-5" />
             </div>
             <div>
-              <p>User page</p>
+              <p>User Page</p>
             </div>
           </div>
         </Link>
-        <Link href="/billing">
+        <Link href="/productmanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
@@ -76,10 +81,42 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
             }`}
           >
             <div className="mr-2">
-              <CreditCardIcon className="h-5 w-5" />
+              <FaRegFolderOpen className="h-5 w-5" />
             </div>
             <div>
-              <p>Billing</p>
+              <p>Product Page</p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/ordermanagement">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/account"
+                ? "bg-blue-100 text-blue-500"
+                : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
+            }`}
+          >
+            <div className="mr-2">
+              <FaWallet className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Order Page</p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/chartmanagement">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/account"
+                ? "bg-blue-100 text-blue-500"
+                : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
+            }`}
+          >
+            <div className="mr-2">
+              <FaChartBar className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Chart Page</p>
             </div>
           </div>
         </Link>
