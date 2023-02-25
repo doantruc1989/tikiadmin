@@ -19,7 +19,7 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`http://localhost:3006/homepage/hero`).then((res) => {
+      axios.get(`https://quocson.fatcatweb.top//homepage/hero`).then((res) => {
         setCategories(res.data);
       });
     } catch (error) {
@@ -76,7 +76,7 @@ function Index() {
                             try {
                               axios
                                 .get(
-                                  `http://localhost:3006/homepage/hero/${category.id}`
+                                  `https://quocson.fatcatweb.top//homepage/hero/${category.id}`
                                 )
                                 .then((res) => {
                                   setCategoryByid(res.data);
@@ -175,7 +175,7 @@ function Index() {
                                 try {
                                   axios
                                     .patch(
-                                      `http://localhost:3006/homepage/hero/${categoryByid.id}`,
+                                      `https://quocson.fatcatweb.top//homepage/hero/${categoryByid.id}`,
                                       {
                                         name:
                                           editCategory || categoryByid.name,

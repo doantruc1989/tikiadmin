@@ -28,7 +28,7 @@ function Homepage() {
 console.log(orders);
   useEffect(() => {
     try {
-      axios.get("http://localhost:3006/cart/admin/day").then((res) => {
+      axios.get("https://quocson.fatcatweb.top//cart/admin/day").then((res) => {
         setMoney(res.data);
       });
     } catch (error) {
@@ -37,13 +37,13 @@ console.log(orders);
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3006/users/total").then((res) => {
+    axios.get("https://quocson.fatcatweb.top//users/total").then((res) => {
       setUsers(res.data);
     });
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3006/cart/total").then((res) => {
+    axios.get("https://quocson.fatcatweb.top//cart/total").then((res) => {
       setOrders(res.data);
     });
   }, []);
@@ -90,7 +90,7 @@ console.log(orders);
                             key={time.id}
                             value={time}
                             onClick={() => {
-                              axios.get(`http://localhost:3006/cart/admin/${time.name}`)
+                              axios.get(`https://quocson.fatcatweb.top//cart/admin/${time.name}`)
                               .then((res:any) => {
                                 setMoney(res.data)
                               })
@@ -170,7 +170,7 @@ console.log(orders);
                             key={time.id}
                             value={time}
                             onClick={() => {
-                              axios.get(`http://localhost:3006/cart/admin/${time.name}`)
+                              axios.get(`https://quocson.fatcatweb.top//cart/admin/${time.name}`)
                               .then((res:any) => {
                                 setMoney(res.data)
                               })

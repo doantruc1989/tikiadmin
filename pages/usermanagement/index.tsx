@@ -55,7 +55,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/users/search?search=searchall&sortBy=${search}`
+          `https://quocson.fatcatweb.top//users/search?search=searchall&sortBy=${search}`
         )
         .then((res: any) => {
           setUsers(res.data);
@@ -69,7 +69,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/users/search?search=${filterRole}&sortBy=role`
+          `https://quocson.fatcatweb.top//users/search?search=${filterRole}&sortBy=role`
         )
         .then((res: any) => {
           setUsers(res.data);
@@ -86,7 +86,7 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`http://localhost:3006/users?page=${page}`).then((res) => {
+      axios.get(`https://quocson.fatcatweb.top//users?page=${page}`).then((res) => {
         setUsers(res.data);
       });
     } catch (error) {
@@ -206,7 +206,7 @@ function Index() {
                             setEditModal(!editModal);
                             try {
                               axios
-                                .get(`http://localhost:3006/users/${user.id}`)
+                                .get(`https://quocson.fatcatweb.top//users/${user.id}`)
                                 .then((res) => {
                                   setUserById(res.data);
                                 });
@@ -360,7 +360,7 @@ function Index() {
                               try {
                                 axios
                                   .patch(
-                                    `http://localhost:3006/users/${userById.id}`,
+                                    `https://quocson.fatcatweb.top//users/${userById.id}`,
                                     {
                                       image: editUserImage || userById.image,
                                       email: editUserEmail || userById.email,
@@ -451,7 +451,7 @@ function Index() {
                           try {
                             axios
                               .delete(
-                                `http://localhost:3006/users/${userById.id}`
+                                `https://quocson.fatcatweb.top//users/${userById.id}`
                               )
                               .then((res) => {
                                 console.log(res.data);
@@ -584,7 +584,7 @@ function Index() {
                             onClick={() => {
                               try {
                                 axios
-                                  .post(`http://localhost:3006/auth/signup`, {
+                                  .post(`https://quocson.fatcatweb.top//auth/signup`, {
                                     email: newUserEmail,
                                     username: newUsername,
                                     password: newUserPassword,

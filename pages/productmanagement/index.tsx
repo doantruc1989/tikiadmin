@@ -50,7 +50,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/product/all?search=searchall&sortBy=${search}`
+          `https://quocson.fatcatweb.top//product/all?search=searchall&sortBy=${search}`
         )
         .then((res: any) => {
           setProducts(res.data);
@@ -62,7 +62,7 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`http://localhost:3006/product?page=${page}`).then((res) => {
+      axios.get(`https://quocson.fatcatweb.top//product?page=${page}`).then((res) => {
         setProducts(res.data);
       });
     } catch (error) {
@@ -74,7 +74,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/product/all?search=${filterPrice}&sortBy=price`
+          `https://quocson.fatcatweb.top//product/all?search=${filterPrice}&sortBy=price`
         )
         .then((res: any) => {
           setProducts(res.data);
@@ -93,7 +93,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/product/all?search=${filterInitialPrice}&sortBy=initialPrice`
+          `https://quocson.fatcatweb.top//product/all?search=${filterInitialPrice}&sortBy=initialPrice`
         )
         .then((res: any) => {
           setProducts(res.data);
@@ -112,7 +112,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/product/all?search=${filterQuantity}&sortBy=quantity`
+          `https://quocson.fatcatweb.top//product/all?search=${filterQuantity}&sortBy=quantity`
         )
         .then((res: any) => {
           setProducts(res.data);
@@ -131,7 +131,7 @@ function Index() {
     try {
       axios
         .get(
-          `http://localhost:3006/product/all?search=${filterCategory}&sortBy=category`
+          `https://quocson.fatcatweb.top//product/all?search=${filterCategory}&sortBy=category`
         )
         .then((res: any) => {
           setProducts(res.data);
@@ -289,7 +289,7 @@ function Index() {
                             try {
                               axios
                                 .get(
-                                  `http://localhost:3006/product/${product.id}`
+                                  `https://quocson.fatcatweb.top//product/${product.id}`
                                 )
                                 .then((res) => {
                                   setProductById(res.data);
@@ -487,7 +487,7 @@ function Index() {
                               try {
                                 axios
                                   .post(
-                                    `http://localhost:3006/product/${productById[0]?.id}`,
+                                    `https://quocson.fatcatweb.top//product/${productById[0]?.id}`,
                                     {
                                       image:
                                         editProductImage || productById[0]?.image,
@@ -596,7 +596,7 @@ function Index() {
                           try {
                             axios
                               .delete(
-                                `http://localhost:3006/product/${productById.id}`
+                                `https://quocson.fatcatweb.top//product/${productById.id}`
                               )
                               .then((res) => {
                                 console.log(res.data);
@@ -816,7 +816,7 @@ function Index() {
                             try {
                               axios
                                 .post(
-                                  `http://localhost:3006/product/createNewProduct`,
+                                  `https://quocson.fatcatweb.top//product/createNewProduct`,
                                   {
                                     image: newProductImage,
                                     productName: newProductName,

@@ -10,7 +10,7 @@ function Notify() {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:3006/lowquantity").then((res: any) => {
+      axios.get("https://quocson.fatcatweb.top//lowquantity").then((res: any) => {
         setNotify(res.data);
       });
     } catch (error) {
@@ -20,7 +20,7 @@ function Notify() {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:3006/cart/admin/checkstatus").then((res: any) => {
+      axios.get("https://quocson.fatcatweb.top//cart/admin/checkstatus").then((res: any) => {
         setStatus(res.data);
       });
     } catch (error) {
