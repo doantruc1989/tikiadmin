@@ -39,23 +39,6 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
           </div>
         </Link>
 
-        <Link href="/homemanagement">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
-                ? "bg-blue-100 text-blue-500"
-                : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
-            }`}
-          >
-            <div className="mr-2">
-              <FaBorderAll className="h-5 w-5" />
-            </div>
-            <div>
-              <p>Home Page</p>
-            </div>
-          </div>
-        </Link>
-
         <Link href="/usermanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -104,6 +87,24 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
             </div>
           </div>
         </Link>
+        
+        <Link href="/homemanagement">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/account"
+                ? "bg-blue-100 text-blue-500"
+                : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
+            }`}
+          >
+            <div className="mr-2">
+              <FaBorderAll className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Home Page</p>
+            </div>
+          </div>
+        </Link>
+        
         <Link href="/chartmanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${

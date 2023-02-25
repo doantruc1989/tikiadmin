@@ -1,3 +1,4 @@
+import CheckAuth from '@/pages/components/CheckAuth';
 import Layout from '@/pages/components/Layout';
 import { Dialog, Transition } from '@headlessui/react';
 import axios from 'axios';
@@ -32,10 +33,10 @@ function Index() {
         <Breadcrumb.Item href="/" icon={FaHome}>
           Dashboard
         </Breadcrumb.Item>
-        <Breadcrumb.Item href='/quanlyhome'>Categories Management</Breadcrumb.Item>
+        <Breadcrumb.Item href='/homemanagement'>Categories Management</Breadcrumb.Item>
         <Breadcrumb.Item>Hero1 Management</Breadcrumb.Item>
       </Breadcrumb>
-
+      <CheckAuth />
       <h1 className="mb-6 font-bold uppercase text-xl text-center">
         Hero1 management
       </h1>

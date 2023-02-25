@@ -13,10 +13,11 @@ import {
   FaHome,
   FaEdit,
   FaRegTrashAlt,
-  FaLongArrowAltDown,
-  FaLongArrowAltUp,
+  FaSortAmountDownAlt,
+  FaSortAmountUp,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
+import CheckAuth from "../components/CheckAuth";
 import Layout from "../components/Layout";
 
 function Index() {
@@ -101,6 +102,7 @@ function Index() {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Users Management</Breadcrumb.Item>
       </Breadcrumb>
+      <CheckAuth />
       <h1 className="mb-6 font-bold uppercase text-xl text-center">
         Users management
       </h1>
@@ -162,9 +164,9 @@ function Index() {
               <a className="cursor-pointer" onClick={handleClickRole}>
                 <div className="flex gap-1 items-center justify-end">
                   {filterRole === "adminasc" ? (
-                    <FaLongArrowAltDown />
+                    <FaSortAmountDownAlt />
                   ) : (
-                    <FaLongArrowAltUp />
+                    <FaSortAmountUp />
                   )}
                   <p>Role</p>
                 </div>
@@ -386,6 +388,7 @@ function Index() {
                           </Button>
 
                           <Button
+                          color="failure"
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:bg-red-400 hover:text-black mt-6"
                             onClick={() => {
                               setDeleteModal(!deleteModal);
@@ -585,7 +588,7 @@ function Index() {
                                     email: newUserEmail,
                                     username: newUsername,
                                     password: newUserPassword,
-                                    image: newUserImage ,
+                                    image: newUserImage,
                                     role: newUserRole || "user",
                                   })
                                   .then((res: any) => {

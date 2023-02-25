@@ -9,8 +9,10 @@ import {
   TextInput,
 } from "flowbite-react";
 import React, { Fragment, ReactElement, useEffect, useState } from "react";
-import { FaHome, FaLongArrowAltDown, FaLongArrowAltUp, FaEdit, FaRegTrashAlt  } from "react-icons/fa";
+import { FaHome, FaSortAmountDownAlt,
+  FaSortAmountUp, FaEdit, FaRegTrashAlt  } from "react-icons/fa";
 import { toast } from "react-toastify";
+import CheckAuth from "../components/CheckAuth";
 import Layout from "../components/Layout";
 
 function Index() {
@@ -43,8 +45,6 @@ function Index() {
   const [filterQuantity, setFilterQuantity] = useState("adminasc");
   const [filterCategory, setFilterCategory] = useState("adminasc");
   const [page, setPage] = useState(1);
-
-console.log(newProductCategory)
 
   useEffect(() => {
     try {
@@ -154,6 +154,7 @@ console.log(newProductCategory)
         </Breadcrumb.Item>
         <Breadcrumb.Item>Products Management</Breadcrumb.Item>
       </Breadcrumb>
+      <CheckAuth />
       <h1 className="mb-6 font-bold uppercase text-xl text-center">
         Products management
       </h1>
@@ -177,7 +178,7 @@ console.log(newProductCategory)
                 }}
                 id="search-dropdown"
                 className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg  border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                placeholder="by name, price, quantity, category..."
+                placeholder="by name, id, price, quantity, category..."
                 required
               />
               <button
@@ -218,7 +219,7 @@ console.log(newProductCategory)
             <Table.HeadCell>
               <a className="cursor-pointer" onClick={handleClickPrice}>
                 <div className="flex gap-1 items-center justify-end">
-                {filterPrice === "adminasc" ? <FaLongArrowAltDown/ > : <FaLongArrowAltUp/>}
+                {filterPrice === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
                 <p>Price</p>
                 </div>
               </a>
@@ -226,7 +227,7 @@ console.log(newProductCategory)
             <Table.HeadCell className="text-end">
               <a className="cursor-pointer" onClick={handleClickInitialPrice}>
               <div className="flex gap-1 items-center justify-end">
-                {filterInitialPrice === "adminasc" ? <FaLongArrowAltDown/ > : <FaLongArrowAltUp/>}
+                {filterInitialPrice === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
                 <p>Initital Price</p>
                 </div>
               </a>
@@ -234,7 +235,7 @@ console.log(newProductCategory)
             <Table.HeadCell className="text-end">
               <a className="cursor-pointer" onClick={handleClickQuantity}>
               <div className="flex gap-1 items-center justify-end">
-                {filterQuantity === "adminasc" ? <FaLongArrowAltDown/ > : <FaLongArrowAltUp/>}
+                {filterQuantity === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
                 <p>Quantity</p>
                 </div>
               </a>
@@ -242,7 +243,7 @@ console.log(newProductCategory)
             <Table.HeadCell>
             <a className="cursor-pointer" onClick={handleClickCategory}>
               <div className="flex gap-1 items-center justify-end">
-                {filterCategory === "adminasc" ? <FaLongArrowAltDown/ > : <FaLongArrowAltUp/>}
+                {filterCategory === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
                 <p>Category</p>
                 </div>
               </a>
@@ -356,7 +357,7 @@ console.log(newProductCategory)
                       <div>
                         <div className="grid grid-cols-1 items-center align-center mx-3">
                           <img
-                            src={productById.image}
+                            src={productById[0]?.image}
                             className="w-full h-auto rounded-lg"
                             alt="..."
                           />
@@ -367,17 +368,17 @@ console.log(newProductCategory)
                                 href="#"
                                 className="text-blue-600 underline ml-2"
                               >
-                                {productById.brand}
+                                {productById[0]?.brand}
                               </a>
                             </div>
                             <h3 className="text-lg md:text-2xl font-medium mb-3">
-                              {productById.productName}
+                              {productById[0]?.productName}
                             </h3>
                             
 
                             <div className="bg-gray-100 font-bold rounded-md p-4 my-4 text-red-700 text-xl md:text-3xl">
                               <h2>
-                                {Intl.NumberFormat().format(productById.price)}{" "}
+                                {Intl.NumberFormat().format(productById[0]?.price)}{" "}
                                 đ
                               </h2>
                             </div>
@@ -388,7 +389,7 @@ console.log(newProductCategory)
                             Mô tả sản phẩm:
                           </h2>
                           <div className="text-sm md:text-base text-justify">
-                            {productById.content}
+                            {productById[0]?.content}
                           </div>
                         </div>
                       </div>
@@ -486,27 +487,27 @@ console.log(newProductCategory)
                               try {
                                 axios
                                   .post(
-                                    `http://localhost:3006/product/${productById.id}`,
+                                    `http://localhost:3006/product/${productById[0]?.id}`,
                                     {
                                       image:
-                                        editProductImage || productById.image,
+                                        editProductImage || productById[0]?.image,
                                       productName:
                                         editProductName ||
-                                        productById.productName,
+                                        productById[0]?.productName,
                                       price:
-                                        editProductPrice || productById.price,
+                                        editProductPrice || productById[0]?.price,
                                       initialPrice:
                                         editProductInitialPrice ||
-                                        productById.initialPrice,
+                                        productById[0]?.initialPrice,
                                       quantity:
                                         editProductQuantity ||
-                                        productById.quantity,
+                                        productById[0]?.quantity,
                                       category:
                                         editProductCategory ||
-                                        productById.category,
+                                        productById[0]?.category,
                                       content:
                                         editProductContent ||
-                                        productById.content,
+                                        productById[0]?.content,
                                       // categoryID:
                                       //   editProductCategoryId ||
                                       //   productById.categoryID.id,
@@ -531,6 +532,7 @@ console.log(newProductCategory)
                           </Button>
 
                           <Button
+                          color="failure"
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:bg-red-400 hover:text-black mt-6"
                             onClick={() => {
                               setDeleteModal(!deleteModal);
@@ -744,37 +746,37 @@ console.log(newProductCategory)
                         className="border rounded-lg w-full bg-blue-100 border-blue-500 text-blue-900"
                       >
                           <option value="lamdep">
-                            Làm Đẹp
+                            11. Làm Đẹp
                           </option>
                           <option value="sach">
-                            Tiki sách
+                            9. Tiki sách
                           </option>
                           <option value="nhahang">
-                            Voucher khách sạn
+                            5. Voucher khách sạn
                           </option>
                           <option value="khoahoc">
-                            Voucher Khoá học
+                            4. Voucher Khoá học
                           </option>
                           <option value="giaynu">
-                            Giày dép nữ
+                            15. Giày dép nữ
                           </option>
                           <option value="dulich">
-                            Voucher Du lịch
+                            6. Voucher Du lịch
                           </option>
                           <option value="donu">
-                            Thời trang nữ
+                            13. Thời trang nữ
                           </option>
                           <option value="donam">
-                            Thời trang nam
+                            14. Thời trang nam
                           </option>
                           <option value="dochoi">
-                            Mẹ và bé
+                            8. Mẹ và bé
                           </option>
                           <option value="dienthoai">
-                            Điện thoại & Máy tính bảng
+                            10. Điện thoại & Máy tính bảng
                           </option>
                           <option value="diengiadung">
-                            Điện gia dụng
+                            12. Điện gia dụng
                           </option>
                     
                       </select>

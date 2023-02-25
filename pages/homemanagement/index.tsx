@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Layout from "../components/Layout";
 import { FaHome, FaEdit } from "react-icons/fa";
 import Link from "next/link";
+import CheckAuth from "../components/CheckAuth";
 
 function Index() {
   const [categories, setCategories] = useState([] as any);
@@ -37,7 +38,7 @@ function Index() {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Categories Management</Breadcrumb.Item>
       </Breadcrumb>
-
+      <CheckAuth />
       <Dropdown label="Hero management" dismissOnClick={false}>
         <Dropdown.Item>
           <Link href={"/homemanagement/hero1management"}>
