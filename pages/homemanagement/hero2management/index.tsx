@@ -19,7 +19,7 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`https://quocson.fatcatweb.top//homepage/chinhhang`).then((res) => {
+      axios.get(`https://quocson.fatcatweb.top/homepage/chinhhang`).then((res) => {
         setCategories(res.data);
       });
     } catch (error) {
@@ -76,7 +76,7 @@ function Index() {
                             try {
                               axios
                                 .get(
-                                  `https://quocson.fatcatweb.top//homepage/chinhhang/${category.id}`
+                                  `https://quocson.fatcatweb.top/homepage/chinhhang/${category.id}`
                                 )
                                 .then((res) => {
                                   setCategoryByid(res.data);
@@ -175,7 +175,7 @@ function Index() {
                                 try {
                                   axios
                                     .patch(
-                                      `https://quocson.fatcatweb.top//homepage/chinhhang/${categoryByid.id}`,
+                                      `https://quocson.fatcatweb.top/homepage/chinhhang/${categoryByid.id}`,
                                       {
                                         name:
                                           editCategory || categoryByid.name,

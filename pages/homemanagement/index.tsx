@@ -21,7 +21,7 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`https://quocson.fatcatweb.top//listcategory`).then((res) => {
+      axios.get(`https://quocson.fatcatweb.top/listcategory`).then((res) => {
         setCategories(res.data);
       });
     } catch (error) {
@@ -94,7 +94,7 @@ function Index() {
                             try {
                               axios
                                 .get(
-                                  `https://quocson.fatcatweb.top//category/${category.id}`
+                                  `https://quocson.fatcatweb.top/category/${category.id}`
                                 )
                                 .then((res) => {
                                   setCategoryByid(res.data[0]);
@@ -201,7 +201,7 @@ function Index() {
                                 try {
                                   axios
                                     .post(
-                                      `https://quocson.fatcatweb.top//category/${categoryByid.id}`,
+                                      `https://quocson.fatcatweb.top/category/${categoryByid.id}`,
                                       {
                                         category:
                                           editCategory || categoryByid.category,
@@ -281,7 +281,7 @@ function Index() {
                           try {
                             axios
                               .delete(
-                                `https://quocson.fatcatweb.top//category/${categoryByid.id}`
+                                `https://quocson.fatcatweb.top/category/${categoryByid.id}`
                               )
                               .then((res) => {
                                 console.log(res.data);

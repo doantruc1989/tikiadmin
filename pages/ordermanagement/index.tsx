@@ -40,7 +40,7 @@ function Index() {
     try {
       axios
         .get(
-          `https://quocson.fatcatweb.top//cart/admin/listorder/search?search=searchall&sortBy=${search}`
+          `https://quocson.fatcatweb.top/cart/admin/listorder/search?search=searchall&sortBy=${search}`
         )
         .then((res: any) => {
           setOrders(res.data);
@@ -53,7 +53,7 @@ function Index() {
   useEffect(() => {
     try {
       axios
-        .get(`https://quocson.fatcatweb.top//cart/admin/listorder?page=${page}`)
+        .get(`https://quocson.fatcatweb.top/cart/admin/listorder?page=${page}`)
         .then((res) => {
           setOrders(res.data);
         });
@@ -66,7 +66,7 @@ function Index() {
     try {
       axios
         .get(
-          `https://quocson.fatcatweb.top//cart/admin/listorder/search?search=${filterCartTotal}&sortBy=cartTotal`
+          `https://quocson.fatcatweb.top/cart/admin/listorder/search?search=${filterCartTotal}&sortBy=cartTotal`
         )
         .then((res: any) => {
           setOrders(res.data);
@@ -85,7 +85,7 @@ function Index() {
     try {
       axios
         .get(
-          `https://quocson.fatcatweb.top//cart/admin/listorder/search?search=${filterUserId}&sortBy=userId`
+          `https://quocson.fatcatweb.top/cart/admin/listorder/search?search=${filterUserId}&sortBy=userId`
         )
         .then((res: any) => {
           setOrders(res.data);
@@ -104,7 +104,7 @@ function Index() {
     try {
       axios
         .get(
-          `https://quocson.fatcatweb.top//cart/admin/listorder/search?search=${filterDate}&sortBy=createdAt`
+          `https://quocson.fatcatweb.top/cart/admin/listorder/search?search=${filterDate}&sortBy=createdAt`
         )
         .then((res: any) => {
           setOrders(res.data);
@@ -123,7 +123,7 @@ function Index() {
     try {
       axios
         .get(
-          `https://quocson.fatcatweb.top//cart/admin/listorder/search?search=${filterStatus}&sortBy=status`
+          `https://quocson.fatcatweb.top/cart/admin/listorder/search?search=${filterStatus}&sortBy=status`
         )
         .then((res: any) => {
           setOrders(res.data);
@@ -309,7 +309,7 @@ function Index() {
                             try {
                               axios
                                 .get(
-                                  `https://quocson.fatcatweb.top//cart/admin/listorder/${order.id}`
+                                  `https://quocson.fatcatweb.top/cart/admin/listorder/${order.id}`
                                 )
                                 .then((res) => {
                                   setOrdersById(res.data);
@@ -485,7 +485,7 @@ function Index() {
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 mt-6"
                             onClick={() => {
                               try {
-                                axios.patch(`https://quocson.fatcatweb.top//cart/admin/listorder/${ordersById.id}`,
+                                axios.patch(`https://quocson.fatcatweb.top/cart/admin/listorder/${ordersById.id}`,
                                 {
                                   status: editStatus || ordersById.status
                                 })
@@ -571,7 +571,7 @@ function Index() {
                           try {
                             axios
                               .delete(
-                                `https://quocson.fatcatweb.top//cart/admin/listorder/${ordersById.id}`
+                                `https://quocson.fatcatweb.top/cart/admin/listorder/${ordersById.id}`
                               )
                               .then((res) => {
                                 setDeleteModal(!deleteModal);
