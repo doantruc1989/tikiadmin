@@ -1,12 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
-import {
-  Breadcrumb,
-  Button,
-  Label,
-  Pagination,
-  Table,
-} from "flowbite-react";
+import { Breadcrumb, Button, Label, Pagination, Table } from "flowbite-react";
 import React, { Fragment, ReactElement, useEffect, useState } from "react";
 import {
   FaEdit,
@@ -200,8 +194,10 @@ function Index() {
               <a className="cursor-pointer" onClick={handleClickCartTotal}>
                 <div className="flex gap-1 items-center justify-end">
                   {filterCartTotal === "adminasc" ? (
-                    <FaSortAmountDownAlt/ >) : <FaSortAmountUp/>
-                  }
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
                   <p>CartTotal</p>
                 </div>
               </a>
@@ -211,7 +207,10 @@ function Index() {
               <a className="cursor-pointer" onClick={handleClickUserId}>
                 <div className="flex gap-1 items-center justify-end">
                   {filterUserId === "adminasc" ? (
-                    <FaSortAmountDownAlt/ >) : <FaSortAmountUp/>}
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
                   <p>UserId</p>
                 </div>
               </a>
@@ -220,7 +219,10 @@ function Index() {
               <a className="cursor-pointer" onClick={handleClickStatus}>
                 <div className="flex gap-1 items-center justify-end">
                   {filterStatus === "adminasc" ? (
-                    <FaSortAmountDownAlt/ >) : <FaSortAmountUp/>}
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
                   <p>Status</p>
                 </div>
               </a>
@@ -229,7 +231,10 @@ function Index() {
               <a className="cursor-pointer" onClick={handleClickDate}>
                 <div className="flex gap-1 items-center justify-end">
                   {filterDate === "adminasc" ? (
-                    <FaSortAmountDownAlt/ >) : <FaSortAmountUp/>}
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
                   <p>Date</p>
                 </div>
               </a>
@@ -269,7 +274,8 @@ function Index() {
                                   />
                                   <span className="md:flex items-center gap-2 hidden">
                                     <span>
-                                      {item.productName.substring(0,30)} {" x "}
+                                      {item.productName.substring(0, 30)}{" "}
+                                      {" x "}
                                       <span className="font-medium">
                                         {item.quantity}
                                       </span>
@@ -285,20 +291,42 @@ function Index() {
                         </div>
                       </Table.Cell>
 
-                      <Table.Cell className="text-end">
+                      <Table.Cell className="text-end font-medium">
                         {Intl.NumberFormat().format(order.cartTotal)}đ
                       </Table.Cell>
-                      <Table.Cell className="text-end">
-                        {order.userId}
+                      <Table.Cell>
+                        <div className="flex flex-col justify-center text-xs gap-2">
+                          <h1 className="font-medium">{order.userId}</h1>
+                          <div className="flex flex-col justify-center gap-1">
+                            <p>
+                              {"Địa chỉ GH: " +
+                                order.username +
+                                " " +
+                                order.phone}
+                            </p>
+                            <p>{order.address}</p>
+                          </div>
+                        </div>
                       </Table.Cell>
-                      <Table.Cell className="text-end">
-                      {order.status === 0
-                                    ? "0. Chờ xác nhận"
-                                    : order.status === 1
-                                    ? "1. Chờ lấy hàng"
-                                    : order.status === 2
-                                    ? "2. Đang giao"
-                                    : "3. Đã giao thành công"}
+                      <Table.Cell>
+                        <div className="flex flex-col justify-center text-xs gap-1">
+                          <p>
+                            {order.status === 0
+                              ? "0. Chờ xác nhận"
+                              : order.status === 1
+                              ? "1. Chờ lấy hàng"
+                              : order.status === 2
+                              ? "2. Đang giao"
+                              : "3. Đã giao thành công"}
+                          </p>
+                          <p>{"- " + order.trans}</p>
+                          <p>{"- " + order.payment}</p>
+                          <p>
+                            {order.isPaid === true
+                              ? "- đã thanh toán"
+                              : "- chưa thanh toán"}
+                          </p>
+                        </div>
                       </Table.Cell>
                       <Table.Cell>{order.createdAt}</Table.Cell>
 
@@ -374,8 +402,8 @@ function Index() {
 
                     <div className="grid lg:grid-cols-2 items-center gap-5">
                       <div>
-                        <div className="grid grid-cols-1 items-center align-center mx-3">
-                          <div className="p-3">
+                        <div className="grid grid-cols-1 items-center align-center">
+                          <div>
                             <div className="my-5 p-2 border border-blue-500 rounded-xl">
                               <div className="flex gap-2 items-center justify-center">
                                 <p className="font-medium text-sm">
@@ -383,10 +411,62 @@ function Index() {
                                 </p>
                                 <p>{ordersById.id}</p>
                               </div>
-                              <div className="flex gap-3 items-center justify-end text-sm mt-2">
-                                <p>{ordersById.createdAt?.substring(0, 10)}</p>
-                                <p>{ordersById.createdAt?.substring(11, 16)}</p>
+                              <div className="flex justify-between items-center border-t border-gray-400 mt-3 text-sm pl-2 pt-3 pb-1">
+                                <div>
+                                  <p className="font-medium">
+                                    Địa chỉ giao hàng:
+                                  </p>
+                                  <div className="pl-2">
+                                    <div className="flex gap-1 imtes-center">
+                                      <p>{ordersById.username}</p>
+                                      <p>{ordersById.phone}</p>
+                                    </div>
+                                    <p>{ordersById.address}</p>
+                                  </div>
+                                  
+                                </div>
+                                <div className="text-xs flex flex-col gap-1 items-end justify-end">
+                                  <p>
+                                    {ordersById.createdAt?.substring(0, 10)}
+                                  </p>
+                                  <p>
+                                    {ordersById.createdAt?.substring(11, 16)}
+                                  </p>
+                                </div>
                               </div>
+
+                              <div className="flex justify-between items-center border-b border-gray-400 text-sm pl-2 pb-3">
+                                    <div>
+                                      <div className="font-medium">
+                                        Phương thức vận chuyển:
+                                      </div>
+                                      <div className="pl-2 flex gap-2">
+                                        {ordersById.trans === "fast" ? (
+                                          <p>Tiêu chuẩn</p>
+                                        ) : (
+                                          <p>Hoả tốc</p>
+                                        )}
+                                        <p className="font-medium">{ordersById.payment === "credit card" ? " " : "COD"}</p>
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      {ordersById.isPaid === false ? (
+                                        <img
+                                        className="h-8 w-auto"
+                                        src="/chuathanhtoan.png"
+                                        alt=""
+                                      />
+                                        
+                                      ) : (
+                                        <img
+                                          className="h-7 w-auto"
+                                          src="/dathanhtoan.png"
+                                          alt=""
+                                        />
+                                      )}
+                                    </div>
+                                  </div>
                               <div className="text-xs p-2">
                                 {JSON.parse(
                                   ordersById.orderItems !== undefined
@@ -485,20 +565,26 @@ function Index() {
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 mt-6"
                             onClick={() => {
                               try {
-                                axios.patch(`https://quocson.fatcatweb.top/cart/admin/listorder/${ordersById.id}`,
-                                {
-                                  status: editStatus || ordersById.status
-                                })
-                                .then((res: any) => {
-                                  if (res.data) {
-                                    toast("Update Order's status successfully", {
-                                      position: toast.POSITION.TOP_RIGHT,
-                                      type: toast.TYPE.SUCCESS,
-                                      className: "toast-message",
-                                    });
-                                  }
-                                  setEditModal(!editModal);
-                                })
+                                axios
+                                  .patch(
+                                    `https://quocson.fatcatweb.top/cart/admin/listorder/${ordersById.id}`,
+                                    {
+                                      status: editStatus || ordersById.status,
+                                    }
+                                  )
+                                  .then((res: any) => {
+                                    if (res.data) {
+                                      toast(
+                                        "Update Order's status successfully",
+                                        {
+                                          position: toast.POSITION.TOP_RIGHT,
+                                          type: toast.TYPE.SUCCESS,
+                                          className: "toast-message",
+                                        }
+                                      );
+                                    }
+                                    setEditModal(!editModal);
+                                  });
                               } catch (error) {
                                 console.log(error);
                               }
@@ -526,8 +612,8 @@ function Index() {
           </Dialog>
         </Transition>
 
-         {/* delelte modal */}
-         <Transition appear show={deleteModal} as={Fragment}>
+        {/* delelte modal */}
+        <Transition appear show={deleteModal} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-10"

@@ -6,6 +6,7 @@ import {
   Label,
   Pagination,
   Table,
+  Textarea,
   TextInput,
 } from "flowbite-react";
 import React, { Fragment, ReactElement, useEffect, useState } from "react";
@@ -44,12 +45,9 @@ function Index() {
 
   useEffect(() => {
     setValidMatch(
-      newUserPassword !== "" &&
-      newUsername !== "" &&
-      newUserEmail !== ""
-      );
-
-}, [newUserPassword, newUsername , newUserEmail])
+      newUserPassword !== "" && newUsername !== "" && newUserEmail !== ""
+    );
+  }, [newUserPassword, newUsername, newUserEmail]);
 
   useEffect(() => {
     try {
@@ -86,9 +84,11 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`https://quocson.fatcatweb.top/users?page=${page}`).then((res) => {
-        setUsers(res.data);
-      });
+      axios
+        .get(`https://quocson.fatcatweb.top/users?page=${page}`)
+        .then((res) => {
+          setUsers(res.data);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -206,7 +206,9 @@ function Index() {
                             setEditModal(!editModal);
                             try {
                               axios
-                                .get(`https://quocson.fatcatweb.top/users/${user.id}`)
+                                .get(
+                                  `https://quocson.fatcatweb.top/users/${user.id}`
+                                )
                                 .then((res) => {
                                   setUserById(res.data);
                                 });
@@ -308,7 +310,9 @@ function Index() {
                             <div className="mb-2 block">
                               <Label htmlFor="small" value="Image" />
                             </div>
-                            <TextInput
+                            <Textarea
+                            rows={3}
+                            placeholder={userById.image}
                               value={editUserImage}
                               onChange={(e) => setEditUserImage(e.target.value)}
                             />
@@ -318,6 +322,7 @@ function Index() {
                               <Label htmlFor="small" value="Email" />
                             </div>
                             <TextInput
+                            placeholder={userById.email}
                               value={editUserEmail}
                               onChange={(e) => setEditUserEmail(e.target.value)}
                             />
@@ -328,6 +333,7 @@ function Index() {
                               <Label htmlFor="small" value="User name" />
                             </div>
                             <TextInput
+                            placeholder={userById.username}
                               value={editUserUsername}
                               onChange={(e) =>
                                 setEditUserUsername(e.target.value)
@@ -346,10 +352,9 @@ function Index() {
                               }
                               className="border rounded-lg w-full bg-gray-100 border-gray-300 text-black"
                             >
-                              <option value={userById.role}>no change</option>
+                              <option selected value={userById.role}>Default</option>
                               <option value="user">user</option>
                               <option value="admin">admin</option>
-                              
                             </select>
                           </div>
                         </div>
@@ -388,7 +393,7 @@ function Index() {
                           </Button>
 
                           <Button
-                          color="failure"
+                            color="failure"
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:bg-red-400 hover:text-black mt-6"
                             onClick={() => {
                               setDeleteModal(!deleteModal);
@@ -511,118 +516,116 @@ function Index() {
                       New User
                     </Dialog.Title>
 
-                
-                        <div className="w-full my-6">
-                          
-                          <div className="mb-3">
-                            <div className="mb-2 block">
-                              <Label htmlFor="small" value="Email:" />
-                            </div>
-                            <TextInput
-                            required={true}
-                              value={newUserEmail}
-                              onChange={(e) => setNewUserEmail(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <div className="mb-2 block">
-                              <Label htmlFor="small" value="User name:" />
-                            </div>
-                            <TextInput
-                            required={true}
-                              value={newUsername}
-                              onChange={(e) => setNewusername(e.target.value)}
-                            />
-                          </div>
-
-                          <div className="mb-3">
-                            <div className="mb-2 block">
-                              <Label htmlFor="small" value="Image:" />
-                            </div>
-                            <TextInput
-                              value={newUserImage}
-                              onChange={(e) =>
-                                setNewUserImage(e.target.value)
-                              }
-                            />
-                          </div>
-
-                          <div className="mb-3">
-                            <div className="mb-2 block">
-                              <Label htmlFor="small" value="Password:" />
-                            </div>
-                            <TextInput
-                            required={true}
-                              value={newUserPassword}
-                              onChange={(e) =>
-                                setNewuserPassword(e.target.value)
-                              }
-                            />
-                          </div>
-
-                          <div className="mb-3">
-                            <div className="mb-2 block">
-                              <Label htmlFor="small" value="Role" />
-                            </div>
-                            <select
-                            required={true}
-                              value={newUserRole}
-                              onChange={(e: any) =>
-                                setNewUserRole(e.target.value)
-                              }
-                              className="border rounded-lg w-full bg-gray-100 border-gray-300 text-black"
-                            >
-                              <option value="user">user</option>
-                              <option value="admin">admin</option>
-                            </select>
-                          </div>
+                    <div className="w-full my-6">
+                      <div className="mb-3">
+                        <div className="mb-2 block">
+                          <Label htmlFor="small" value="Email:" />
                         </div>
-                        <div className="flex justify-evenly gap-5">
-                          <Button
-                            className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 mt-6"
-                            disabled={!validMatch}
-                            onClick={() => {
-                              try {
-                                axios
-                                  .post(`https://quocson.fatcatweb.top/auth/signup`, {
-                                    email: newUserEmail,
-                                    username: newUsername,
-                                    password: newUserPassword,
-                                    image: newUserImage,
-                                    role: newUserRole || "user",
-                                  })
-                                  .then((res: any) => {
-                                    setNewUserEmail("");
-                                    setNewUserImage("");
-                                    setNewUserRole("");
-                                    setNewuserPassword("");
-                                    setNewusername("");
-                                    setNewUserModal(false);
+                        <TextInput
+                          required={true}
+                          value={newUserEmail}
+                          onChange={(e) => setNewUserEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <div className="mb-2 block">
+                          <Label htmlFor="small" value="User name:" />
+                        </div>
+                        <TextInput
+                          required={true}
+                          value={newUsername}
+                          onChange={(e) => setNewusername(e.target.value)}
+                        />
+                      </div>
 
-                                    if (res.data?.accessToken) {
-                                      toast("Create new user successfully", {
-                                        position: toast.POSITION.TOP_RIGHT,
-                                        type: toast.TYPE.SUCCESS,
-                                        className: "toast-message",
-                                      });
-                                     
-                                    }
-                                  });
-                              } catch (error: any) {
-                                if (error) {
-                                  toast(`${error?.response.data.messenger}. Please try again`, {
+                      <div className="mb-3">
+                        <div className="mb-2 block">
+                          <Label htmlFor="small" value="Image:" />
+                        </div>
+                        <Textarea
+                        rows={3}
+                          value={newUserImage}
+                          onChange={(e) => setNewUserImage(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <div className="mb-2 block">
+                          <Label htmlFor="small" value="Password:" />
+                        </div>
+                        <TextInput
+                          required={true}
+                     
+                          value={newUserPassword}
+                          onChange={(e) => setNewuserPassword(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <div className="mb-2 block">
+                          <Label htmlFor="small" value="Role" />
+                        </div>
+                        <select
+                          required={true}
+                          value={newUserRole}
+                          onChange={(e: any) => setNewUserRole(e.target.value)}
+                          className="border rounded-lg w-full bg-gray-100 border-gray-300 text-black"
+                        >
+                          <option selected value="user">user</option>
+                          <option value="admin">admin</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex justify-evenly gap-5">
+                      <Button
+                        className="font-medium  text-blue-600 dark:text-blue-500 mt-6"
+                        disabled={!validMatch}
+                        onClick={() => {
+                          try {
+                            axios
+                              .post(
+                                `https://quocson.fatcatweb.top/auth/signup`,
+                                {
+                                  email: newUserEmail,
+                                  username: newUsername,
+                                  password: newUserPassword,
+                                  image: newUserImage || "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png?20170128014309",
+                                  role: newUserRole || "user",
+                                }
+                              )
+                              .then((res: any) => {
+                                setNewUserEmail("");
+                                setNewUserImage("");
+                                setNewUserRole("");
+                                setNewuserPassword("");
+                                setNewusername("");
+                                setNewUserModal(false);
+
+                                if (res.data?.accessToken) {
+                                  toast("Create new user successfully", {
                                     position: toast.POSITION.TOP_RIGHT,
-                                    type: toast.TYPE.ERROR,
+                                    type: toast.TYPE.SUCCESS,
                                     className: "toast-message",
                                   });
                                 }
-                              }
-                            }}
-                          >
-                            Add
-                          </Button>
-                        </div>
-              
+                              });
+                          } catch (error: any) {
+                            if (error) {
+                              toast(
+                                `${error?.response.data.messenger}. Please try again`,
+                                {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  type: toast.TYPE.ERROR,
+                                  className: "toast-message",
+                                }
+                              );
+                            }
+                          }
+                        }}
+                      >
+                        Add
+                      </Button>
+                    </div>
                   </Dialog.Panel>
                 </Transition.Child>
               </div>

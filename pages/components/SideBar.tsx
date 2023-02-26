@@ -42,7 +42,7 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
         <Link href="/usermanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "/usermanagement"
                 ? "bg-blue-100 text-blue-500"
                 : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
             }`}
@@ -58,7 +58,7 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
         <Link href="/productmanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/billing"
+              router.pathname == "/productmanagement"
                 ? "bg-blue-100 text-blue-500"
                 : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
             }`}
@@ -74,7 +74,7 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
         <Link href="/ordermanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "/ordermanagement"
                 ? "bg-blue-100 text-blue-500"
                 : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
             }`}
@@ -91,7 +91,7 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
         <Link href="/homemanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "/homemanagement"
                 ? "bg-blue-100 text-blue-500"
                 : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
             }`}
@@ -108,7 +108,7 @@ const SideBar = forwardRef(({ showNav }: any, ref: any) => {
         <Link href="/chartmanagement">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "/chartmanagement"
                 ? "bg-blue-100 text-blue-500"
                 : "text-gray-400 hover:bg-blue-100 hover:text-blue-500"
             }`}

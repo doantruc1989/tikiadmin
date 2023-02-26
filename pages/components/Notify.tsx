@@ -77,11 +77,11 @@ function Notify() {
               <div className="ml-4">
                 <Link href={"/ordermanagement"}>
                 <div className={isActive? "font-normal text-gray-700" : "font-medium text-gray-700"}>
-                  {"Order có Id " +
+                  {"Order có id " +
                     item.id +
-                    " do user có Id " +
-                    item.userId +
-                    " đặt vẫn chưa được xử lý"}
+                    " do user có id " +
+                    item.userId + " {" + item.username +
+                    "} đặt vẫn chưa được xử lý"}
                 </div>
                 <p className="text-sm text-gray-500 truncate">
                   Vui lòng xử lý và gửi hàng sớm

@@ -6,11 +6,17 @@ import {
   Label,
   Pagination,
   Table,
+  Textarea,
   TextInput,
 } from "flowbite-react";
 import React, { Fragment, ReactElement, useEffect, useState } from "react";
-import { FaHome, FaSortAmountDownAlt,
-  FaSortAmountUp, FaEdit, FaRegTrashAlt  } from "react-icons/fa";
+import {
+  FaHome,
+  FaSortAmountDownAlt,
+  FaSortAmountUp,
+  FaEdit,
+  FaRegTrashAlt,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 import CheckAuth from "../components/CheckAuth";
 import Layout from "../components/Layout";
@@ -30,6 +36,7 @@ function Index() {
   const [newProductQuantity, setNewProductQuantity] = useState("");
   const [newProductCategory, setNewProductCategory] = useState("");
   const [newProductCategoryId, setNewProductCategoryId] = useState("");
+  const [disable,setDisable] = useState(false);
 
   const [editProductName, setEditProductName] = useState("");
   const [editProductContent, setEditProductContent] = useState("");
@@ -47,6 +54,26 @@ function Index() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    setDisable(newProductName !== "" &&
+    newProductContent !== "" &&
+    newProductImage !== "" &&
+    newProductPrice !== "" &&
+    newProductInitialPrice !== "" &&
+    newProductQuantity !== "" &&
+    newProductCategory !== "" &&
+    newProductCategoryId !== ""
+    )
+  },[newProductName,
+    newProductContent,
+    newProductImage,
+    newProductPrice,
+    newProductInitialPrice,
+    newProductQuantity,
+    newProductCategory,
+    newProductCategoryId
+  ])
+
+  useEffect(() => {
     try {
       axios
         .get(
@@ -62,9 +89,11 @@ function Index() {
 
   useEffect(() => {
     try {
-      axios.get(`https://quocson.fatcatweb.top/product?page=${page}`).then((res) => {
-        setProducts(res.data);
-      });
+      axios
+        .get(`https://quocson.fatcatweb.top/product?page=${page}`)
+        .then((res) => {
+          setProducts(res.data);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +173,7 @@ function Index() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="my-6">
@@ -219,36 +248,51 @@ function Index() {
             <Table.HeadCell>
               <a className="cursor-pointer" onClick={handleClickPrice}>
                 <div className="flex gap-1 items-center justify-end">
-                {filterPrice === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
-                <p>Price</p>
+                  {filterPrice === "adminasc" ? (
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
+                  <p>Price</p>
                 </div>
               </a>
             </Table.HeadCell>
             <Table.HeadCell className="text-end">
               <a className="cursor-pointer" onClick={handleClickInitialPrice}>
-              <div className="flex gap-1 items-center justify-end">
-                {filterInitialPrice === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
-                <p>Initital Price</p>
+                <div className="flex gap-1 items-center justify-end">
+                  {filterInitialPrice === "adminasc" ? (
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
+                  <p>Initital Price</p>
                 </div>
               </a>
             </Table.HeadCell>
             <Table.HeadCell className="text-end">
               <a className="cursor-pointer" onClick={handleClickQuantity}>
-              <div className="flex gap-1 items-center justify-end">
-                {filterQuantity === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
-                <p>Quantity</p>
+                <div className="flex gap-1 items-center justify-end">
+                  {filterQuantity === "adminasc" ? (
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
+                  <p>Quantity</p>
                 </div>
               </a>
             </Table.HeadCell>
             <Table.HeadCell>
-            <a className="cursor-pointer" onClick={handleClickCategory}>
-              <div className="flex gap-1 items-center justify-end">
-                {filterCategory === "adminasc" ? <FaSortAmountDownAlt/ > : <FaSortAmountUp/>}
-                <p>Category</p>
+              <a className="cursor-pointer" onClick={handleClickCategory}>
+                <div className="flex gap-1 items-center justify-end">
+                  {filterCategory === "adminasc" ? (
+                    <FaSortAmountDownAlt />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
+                  <p>Category</p>
                 </div>
               </a>
-              
-              </Table.HeadCell>
+            </Table.HeadCell>
 
             <Table.HeadCell>
               <span className="sr-only">Edit</span>
@@ -324,9 +368,8 @@ function Index() {
         />
       </div>
 
-     
       <div className="mx-auto w-full">
-         {/* edit modal */}
+        {/* edit modal */}
         <Transition appear show={editModal} as={Fragment}>
           <Dialog
             as="div"
@@ -353,7 +396,6 @@ function Index() {
                     </Dialog.Title>
 
                     <div className="grid lg:grid-cols-2 items-center gap-5">
-
                       <div>
                         <div className="grid grid-cols-1 items-center align-center mx-3">
                           <img
@@ -374,11 +416,12 @@ function Index() {
                             <h3 className="text-lg md:text-2xl font-medium mb-3">
                               {productById[0]?.productName}
                             </h3>
-                            
 
                             <div className="bg-gray-100 font-bold rounded-md p-4 my-4 text-red-700 text-xl md:text-3xl">
                               <h2>
-                                {Intl.NumberFormat().format(productById[0]?.price)}{" "}
+                                {Intl.NumberFormat().format(
+                                  productById[0]?.price
+                                )}{" "}
                                 đ
                               </h2>
                             </div>
@@ -396,14 +439,18 @@ function Index() {
 
                       <div>
                         <div className="w-full mb-6">
-                          <h1 className="text-center font-medium text-lg my-6">New Information</h1>
+                          <h1 className="text-center font-medium text-lg my-6">
+                            New Information
+                          </h1>
                           <div className="mb-3">
                             <div className="mb-2 block">
                               <Label htmlFor="small" value="Image" />
                             </div>
-                            <TextInput
+                            <Textarea
+                              rows={4}
+                              placeholder={productById[0]?.image}
                               value={editProductImage}
-                              onChange={(e) =>
+                              onChange={(e: any) =>
                                 setEditProductImage(e.target.value)
                               }
                             />
@@ -412,7 +459,9 @@ function Index() {
                             <div className="mb-2 block">
                               <Label htmlFor="small" value="Product Name" />
                             </div>
-                            <TextInput
+                            <Textarea
+                              rows={3}
+                              placeholder={productById[0]?.productName}
                               value={editProductName}
                               onChange={(e) =>
                                 setEditProductName(e.target.value)
@@ -425,7 +474,9 @@ function Index() {
                               <Label htmlFor="small" value="Product Price" />
                             </div>
                             <TextInput
+                              placeholder={productById[0]?.price}
                               value={editProductPrice}
+                              type="number"
                               onChange={(e) =>
                                 setEditProductPrice(e.target.value)
                               }
@@ -437,7 +488,9 @@ function Index() {
                               <Label htmlFor="small" value="Initial Price" />
                             </div>
                             <TextInput
+                              placeholder={productById[0]?.initialPrice}
                               value={editProductInitialPrice}
+                              type="number"
                               onChange={(e) =>
                                 setEditProductInitialPrice(e.target.value)
                               }
@@ -449,7 +502,9 @@ function Index() {
                               <Label htmlFor="small" value="Quantity" />
                             </div>
                             <TextInput
+                              placeholder={productById[0]?.quantity}
                               value={editProductQuantity}
+                              type="number"
                               onChange={(e) =>
                                 setEditProductQuantity(e.target.value)
                               }
@@ -460,19 +515,45 @@ function Index() {
                             <div className="mb-2 block">
                               <Label htmlFor="small" value="Category" />
                             </div>
-                            <TextInput
+                            <select
                               value={editProductCategory}
+                              className="border rounded-lg w-full bg-blue-100 border-blue-500 text-blue-900"
                               onChange={(e) =>
                                 setEditProductCategory(e.target.value)
                               }
-                            />
+                            >
+                              <option selected value={productById[0]?.category}>
+                                Default
+                              </option>
+                              <option value="khoahoc">
+                                4. Voucher Khoá học
+                              </option>
+                              <option value="nhahang">
+                                5. Voucher khách sạn
+                              </option>
+                              <option value="dulich">6. Voucher Du lịch</option>
+                              <option value="dochoi">8. Mẹ và bé</option>
+                              <option value="sach">9. Tiki sách</option>
+                              <option value="dienthoai">
+                                10. Điện thoại & Máy tính bảng
+                              </option>
+                              <option value="lamdep">11. Làm Đẹp</option>
+                              <option value="diengiadung">
+                                12. Điện gia dụng
+                              </option>
+                              <option value="donu">13. Thời trang nữ</option>
+                              <option value="donam">14. Thời trang nam</option>
+                              <option value="giaynu">15. Giày dép nữ</option>
+                            </select>
                           </div>
 
                           <div className="mb-3">
                             <div className="mb-2 block">
                               <Label htmlFor="small" value="Content" />
                             </div>
-                            <TextInput
+                            <Textarea
+                              rows={6}
+                              placeholder={productById[0]?.content}
                               value={editProductContent}
                               onChange={(e) =>
                                 setEditProductContent(e.target.value)
@@ -490,12 +571,14 @@ function Index() {
                                     `https://quocson.fatcatweb.top/product/${productById[0]?.id}`,
                                     {
                                       image:
-                                        editProductImage || productById[0]?.image,
+                                        editProductImage ||
+                                        productById[0]?.image,
                                       productName:
                                         editProductName ||
                                         productById[0]?.productName,
                                       price:
-                                        editProductPrice || productById[0]?.price,
+                                        editProductPrice ||
+                                        productById[0]?.price,
                                       initialPrice:
                                         editProductInitialPrice ||
                                         productById[0]?.initialPrice,
@@ -532,7 +615,7 @@ function Index() {
                           </Button>
 
                           <Button
-                          color="failure"
+                            color="failure"
                             className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:bg-red-400 hover:text-black mt-6"
                             onClick={() => {
                               setDeleteModal(!deleteModal);
@@ -542,7 +625,6 @@ function Index() {
                           </Button>
                         </div>
                       </div>
-
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>
@@ -653,7 +735,11 @@ function Index() {
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      New Product
+                      <div className="flex flex-col items-center justify-center">
+                        <h1>New Product</h1>
+                      <p className="text-sm mt-2">(Vui lòng điền đầy đủ thông tin)</p>
+
+                      </div>
                     </Dialog.Title>
 
                     <div className="w-full mb-6 mt-6">
@@ -661,7 +747,8 @@ function Index() {
                         <div className="mb-2 block">
                           <Label htmlFor="small" value="Image" />
                         </div>
-                        <TextInput
+                        <Textarea
+                          rows={3}
                           value={newProductImage}
                           required={true}
                           color="info"
@@ -674,7 +761,8 @@ function Index() {
                         <div className="mb-2 block">
                           <Label htmlFor="small" value="Product Name" />
                         </div>
-                        <TextInput
+                        <Textarea
+                          rows={2}
                           value={newProductName}
                           required={true}
                           color="info"
@@ -686,9 +774,10 @@ function Index() {
 
                       <div className="mb-3">
                         <div className="mb-2 block">
-                          <Label htmlFor="small" value="Product Price" />
+                          <Label htmlFor="small" value="Price" />
                         </div>
                         <TextInput
+                          type="number"
                           value={newProductPrice}
                           required={true}
                           color="info"
@@ -703,6 +792,7 @@ function Index() {
                           <Label htmlFor="small" value="Initial Price" />
                         </div>
                         <TextInput
+                          type="number"
                           value={newProductInitialPrice}
                           required={true}
                           color="info"
@@ -717,6 +807,7 @@ function Index() {
                           <Label htmlFor="small" value="Quantity" />
                         </div>
                         <TextInput
+                          type="number"
                           value={newProductQuantity}
                           required={true}
                           color="info"
@@ -739,54 +830,34 @@ function Index() {
                           }
                         /> */}
                         <select
-                        value={newProductCategory}
-                        onChange={(e: any) =>
-                          setNewProductCategory(e.target.value)
-                        }
-                        className="border rounded-lg w-full bg-blue-100 border-blue-500 text-blue-900"
-                      >
-                          <option value="lamdep">
-                            11. Làm Đẹp
-                          </option>
-                          <option value="sach">
-                            9. Tiki sách
-                          </option>
-                          <option value="nhahang">
-                            5. Voucher khách sạn
-                          </option>
-                          <option value="khoahoc">
-                            4. Voucher Khoá học
-                          </option>
-                          <option value="giaynu">
-                            15. Giày dép nữ
-                          </option>
-                          <option value="dulich">
-                            6. Voucher Du lịch
-                          </option>
-                          <option value="donu">
-                            13. Thời trang nữ
-                          </option>
-                          <option value="donam">
-                            14. Thời trang nam
-                          </option>
-                          <option value="dochoi">
-                            8. Mẹ và bé
-                          </option>
+                          value={newProductCategory}
+                          onChange={(e: any) =>
+                            setNewProductCategory(e.target.value)
+                          }
+                          className="border rounded-lg w-full bg-blue-100 border-blue-500 text-blue-900"
+                        >
+                          <option value="khoahoc">4. Voucher Khoá học</option>
+                          <option value="nhahang">5. Voucher khách sạn</option>
+                          <option value="dulich">6. Voucher Du lịch</option>
+                          <option value="dochoi">8. Mẹ và bé</option>
+                          <option value="sach">9. Tiki sách</option>
                           <option value="dienthoai">
                             10. Điện thoại & Máy tính bảng
                           </option>
-                          <option value="diengiadung">
-                            12. Điện gia dụng
-                          </option>
-                    
-                      </select>
+                          <option value="lamdep">11. Làm Đẹp</option>
+                          <option value="diengiadung">12. Điện gia dụng</option>
+                          <option value="donu">13. Thời trang nữ</option>
+                          <option value="donam">14. Thời trang nam</option>
+                          <option value="giaynu">15. Giày dép nữ</option>
+                        </select>
                       </div>
 
                       <div className="mb-3">
                         <div className="mb-2 block">
                           <Label htmlFor="small" value="Content" />
                         </div>
-                        <TextInput
+                        <Textarea
+                        rows={5}
                           value={newProductContent}
                           required={true}
                           color="info"
@@ -798,20 +869,36 @@ function Index() {
 
                       <div className="mb-3">
                         <div className="mb-2 block">
-                          <Label htmlFor="small" value="CategoryId" />
+                          <Label htmlFor="small" value="CategoryId (vui lòng chọn giống với Category)" />
                         </div>
-                        <TextInput
+                        <select
                           value={newProductCategoryId}
                           required={true}
+                          className="border rounded-lg w-full bg-blue-100 border-blue-500 text-blue-900"
                           color="info"
                           onChange={(e: any) =>
                             setNewProductCategoryId(e.target.value)
                           }
-                        />
+                        >
+                          <option value="4">4. Voucher Khoá học</option>
+                          <option value="5">5. Voucher khách sạn</option>
+                          <option value="6">6. Voucher Du lịch</option>
+                          <option value="8">8. Mẹ và bé</option>
+                          <option value="9">9. Tiki sách</option>
+                          <option value="10">
+                            10. Điện thoại & Máy tính bảng
+                          </option>
+                          <option value="11">11. Làm Đẹp</option>
+                          <option value="12">12. Điện gia dụng</option>
+                          <option value="13">13. Thời trang nữ</option>
+                          <option value="14">14. Thời trang nam</option>
+                          <option value="15">15. Giày dép nữ</option>
+                        </select>
                       </div>
 
                       <div className="flex justify-evenly gap-5">
                         <Button
+                        disabled={!disable}
                           onClick={() => {
                             try {
                               axios
@@ -840,7 +927,7 @@ function Index() {
                                   setNewProductName("");
                                   setNewProductPrice("");
                                   setNewProductQuantity("");
-                                  console.log(res.data)
+                                  console.log(res.data);
                                   if (res.data) {
                                     toast("Create new product successfully", {
                                       position: toast.POSITION.TOP_RIGHT,
